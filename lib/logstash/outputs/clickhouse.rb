@@ -117,7 +117,7 @@ class LogStash::Outputs::ClickHouse < LogStash::Outputs::Base
 
     lines = []
     events.each do |event|
-        line = LogStash::Json.dump( mutate( event.to_hash) )
+        line = LogStash::Json.dump( event.to_hash )
         lines.push(line)
     end
     documents = lines.join("\n")

@@ -5,7 +5,7 @@
 ```
 FROM docker.elastic.co/logstash/logstash-oss:latest
 
-COPY --from=deanar/logstash-output-clickhouse:0.1.1 /logstash-output-clickhouse-0.1.1.gem /tmp/logstash-output-clickhouse.gem
+COPY --from=gorazio/logstash-output-clickhouse:0.1.3 /logstash-output-clickhouse-0.1.3.gem /tmp/logstash-output-clickhouse.gem
 
 RUN logstash-plugin install /tmp/logstash-output-clickhouse.gem
 ```
@@ -23,10 +23,6 @@ Please note that the name of the plugin when used is `clickhouse`, it only suppo
         headers => ["Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM="]
         http_hosts => ["http://your.clickhouse1/", "http://your.clickhouse2/", "http://your.clickhouse3/"]
         table => "table_name"
-        mutations => {
-          "to1" => "from1",
-          "to2" => [ "from2", "(.)(.)", '\1\2' ]
-        }
       }
     }
 
